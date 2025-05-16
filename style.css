@@ -49,8 +49,8 @@ footer {
   background-color: #b00;
 }
 .tyre-img {
-  width: 100%;
-   height: 150px;
+  width: 150%;
+   height: 200px;
   object-fit: contain;
    display: block;
  margin: 0 auto 10px;
