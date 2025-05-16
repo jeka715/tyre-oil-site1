@@ -21,11 +21,16 @@ footer {
 }
 .tyre-card {
   border: 1px solid #ccc;
-  padding: 16px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  background-color: #f9f9f9;
-  max-width: 400px;
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .tyre-card h3 {
   margin-top: 0;
