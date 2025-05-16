@@ -54,13 +54,12 @@ footer {
   background-color: #b00;
 }
 .tyre-img {
-  width: 150%;
-   height: 200px;
+  height: 160px;
+  width: auto;
   object-fit: contain;
-   display: block;
- margin: 0 auto 10px;
+  margin: 0 auto 10px;
+  display: block;
 }
-
 .card {
   padding: 20px;
   border: 1px solid #ccc;
