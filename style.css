@@ -218,4 +218,10 @@ button:hover {
   border-radius: 5px;
   pointer-events: none;
 }
+body {
+  background-image: url('images/назва_зображення.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
