@@ -219,3 +219,8 @@ button:hover {
   pointer-events: none;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+}
