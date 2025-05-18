@@ -7,6 +7,51 @@
   <meta name="description" content="Купити шини та моторні оливи з безкоштовною доставкою Нова Пошта або SAT. Найкращі бренди за вигідними цінами.">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.png" type="image/png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+    .tyre-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .tyre-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+    .tyre-img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+    #filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    #filters select {
+      padding: 5px;
+    }
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -22,33 +67,30 @@
   <main>
     <section>
       <h2>Легкові шини</h2>
-      <p>Каталог з цінами і фільтрами буде тут</p>
+      <div id="filters">
+        <select id="sizeFilter">
+          <option value="">Всі розміри</option>
+          <option value="185/65 R15">185/65 R15</option>
+          <option value="195/65 R15">195/65 R15</option>
+          <option value="205/65 R16">205/65 R16</option>
+        </select>
+
+        <select id="brandFilter">
+          <option value="">Всі бренди</option>
+          <option value="Atlander">Atlander</option>
+          <option value="Sunfull">Sunfull</option>
+        </select>
+
+        <select id="seasonFilter">
+          <option value="">Будь-який сезон</option>
+          <option value="Літні">Літні</option>
+          <option value="Зимові">Зимові</option>
+          <option value="Всесезонні">Всесезонні</option>
+        </select>
+      </div>
+      <div class="tyre-grid" id="tyreContainer"></div>
     </section>
   </main>
-
-  <div id="filters">
-    <select id="sizeFilter">
-      <option value="">Всі розміри</option>
-      <option value="185/65 R15">185/65 R15</option>
-      <option value="195/65 R15">195/65 R15</option>
-      <option value="205/65 R16">205/65 R16</option>
-    </select>
-
-    <select id="brandFilter">
-      <option value="">Всі бренди</option>
-      <option value="Atlander">Atlander</option>
-      <option value="Sunfull">Sunfull</option>
-    </select>
-
-    <select id="seasonFilter">
-      <option value="">Будь-який сезон</option>
-      <option value="Літні">Літні</option>
-      <option value="Зимові">Зимові</option>
-      <option value="Всесезонні">Всесезонні</option>
-    </select>
-  </div>
-
-  <div class="tyre-grid" id="tyreContainer"></div>
 
   <footer>
     <p>© 2025 Tyre & Oil</p>
@@ -61,104 +103,102 @@
   <script>
     const tyres = [
       {
-        name: "Atlander AX-77",
-        size: "185/65 R15",
-        brand: "Atlander",
-        season: "Літні",
-        speed: "88H",
-        price: 1800,
-        stock: 8,
-        country: "Китай",
-        image: "images/Atlander_AX77.jpg"
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '185/65 R15',
+        index: '88H',
+        season: 'Літні',
+        price: '1 800 грн',
+        quantity: '8 шт',
+        country: 'Китай',
+        brand: 'Atlander'
       },
       {
-        name: "Atlander AX-77",
-        size: "195/65 R15",
-        brand: "Atlander",
-        season: "Літні",
-        speed: "91V",
-        price: 1920,
-        stock: 20,
-        country: "Китай",
-        image: "images/Atlander_AX77.jpg"
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '195/65 R15',
+        index: '91V',
+        season: 'Літні',
+        price: '1 920 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Atlander'
       },
       {
-        name: "Sunfull SF-688",
-        size: "195/65 R15",
-        brand: "Sunfull",
-        season: "Літні",
-        speed: "91V",
-        price: 1750,
-        stock: 20,
-        country: "Китай",
-        image: "images/Sunfull SF-688.jpg"
+        img: 'images/Sunfull SF-688.jpg',
+        model: 'Sunfull SF-688',
+        size: '195/65 R15',
+        index: '91V',
+        season: 'Літні',
+        price: '1 750 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
       },
       {
-        name: "Sunfull SF-688",
-        size: "205/65 R16",
-        brand: "Sunfull",
-        season: "Літні",
-        speed: "95H",
-        price: 2250,
-        stock: 12,
-        country: "Китай",
-        image: "images/Sunfull SF-688.jpg"
+        img: 'images/Sunfull SF-688.jpg',
+        model: 'Sunfull SF-688',
+        size: '205/65 R16',
+        index: '95H',
+        season: 'Літні',
+        price: '2 250 грн',
+        quantity: '12 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
       }
     ];
 
     function renderTyres(list) {
-      const container = document.getElementById("tyreContainer");
-      container.innerHTML = "";
-
-      list.forEach(t => {
-        const div = document.createElement("div");
-        div.className = "tyre-card";
-        div.innerHTML = `
-          <img src="${t.image}" alt="${t.name}" class="tyre-img" onclick="openLightbox('${t.image}')">
-          <h3>${t.name}</h3>
-          <p><strong>Розмір:</strong> ${t.size}</p>
-          <p><strong>Індекс навантаження/швидкості:</strong> ${t.speed}</p>
-          <p><strong>Сезон:</strong> ${t.season}</p>
-          <p><strong>Ціна:</strong> ${t.price} грн</p>
-          <p><strong>Кількість на складі:</strong> ${t.stock} шт</p>
-          <p><strong>Країна:</strong> ${t.country}</p>
+      const container = document.getElementById('tyreContainer');
+      container.innerHTML = '';
+      list.forEach(tyre => {
+        const card = document.createElement('div');
+        card.className = 'tyre-card';
+        card.innerHTML = `
+          <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+          <h3>${tyre.model}</h3>
+          <p><strong>Розмір:</strong> ${tyre.size}</p>
+          <p><strong>Індекс:</strong> ${tyre.index}</p>
+          <p><strong>Сезон:</strong> ${tyre.season}</p>
+          <p><strong>Ціна:</strong> ${tyre.price}</p>
+          <p><strong>Кількість:</strong> ${tyre.quantity}</p>
+          <p><strong>Країна:</strong> ${tyre.country}</p>
           <p><strong>Доставка:</strong> Безкоштовна (Нова Пошта або SAT)</p>
           <button class="add-to-cart">Додати в заявку</button>
         `;
-        container.appendChild(div);
+        container.appendChild(card);
       });
     }
 
     function applyFilters() {
-      const size = document.getElementById("sizeFilter").value;
-      const brand = document.getElementById("brandFilter").value;
-      const season = document.getElementById("seasonFilter").value;
+      const size = document.getElementById('sizeFilter').value;
+      const brand = document.getElementById('brandFilter').value;
+      const season = document.getElementById('seasonFilter').value;
 
-      const filtered = tyres.filter(t =>
-        (!size || t.size === size) &&
-        (!brand || t.brand === brand) &&
-        (!season || t.season === season)
-      );
+      const filtered = tyres.filter(tyre => {
+        return (!size || tyre.size === size) &&
+               (!brand || tyre.brand === brand) &&
+               (!season || tyre.season === season);
+      });
 
       renderTyres(filtered);
     }
 
-    document.querySelectorAll('#filters select').forEach(select => {
-      select.addEventListener('change', applyFilters);
-    });
-
-    renderTyres(); // перший запуск
+    document.getElementById('sizeFilter').addEventListener('change', applyFilters);
+    document.getElementById('brandFilter').addEventListener('change', applyFilters);
+    document.getElementById('seasonFilter').addEventListener('change', applyFilters);
 
     function openLightbox(src) {
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      lightboxImg.src = src;
-      lightbox.style.display = "flex";
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
     }
 
     function closeLightbox() {
-      document.getElementById("lightbox").style.display = "none";
+      document.getElementById('lightbox').style.display = 'none';
     }
+
+    // показати всі шини при завантаженні
+    renderTyres(tyres);
   </script>
 </body>
 </html>
