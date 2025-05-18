@@ -209,6 +209,12 @@ function applyTruckFilters() {
 
   renderTruckTyres(filtered);
 }
+document.getElementById('truckSizeFilter').addEventListener('change', applyTruckFilters);
+document.getElementById('truckBrandFilter').addEventListener('change', applyTruckFilters);
+document.getElementById('truckSeasonFilter').addEventListener('change', applyTruckFilters);
+
+// Показати всі вантажні шини при завантаженні
+renderTruckTyres(truckTyres);
 ];
     const tyres = [
       {
