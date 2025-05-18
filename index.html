@@ -201,4 +201,26 @@
     renderTyres(tyres);
   </script>
 </body>
+
+<section id="contacts">
+  <h2>Контакти</h2>
+  <p><strong>Компанія:</strong> Tyre & Oil</p>
+  <p><strong>Телефон:</strong> <a href="tel:+380961112233">+38 (096) 111-22-33</a></p>
+  <p><strong>Email:</strong> <a href="mailto:mpkcompany74@gmail.com">mpkcompany74@gmail.com</a></p>
+  <p><strong>Графік роботи:</strong> Пн–Сб: 09:00–18:00, Нд: вихідний</p>
+
+  <h3>Зворотній зв'язок</h3>
+  <form action="mailto:mpkcompany74@gmail.com" method="POST" enctype="text/plain">
+    <label for="name">Ім'я:</label><br />
+    <input type="text" id="name" name="name" required><br /><br />
+
+    <label for="phone">Телефон:</label><br />
+    <input type="tel" id="phone" name="phone" required><br /><br />
+
+    <label for="message">Повідомлення:</label><br />
+    <textarea id="message" name="message" rows="4" required></textarea><br /><br />
+
+    <button type="submit">Надіслати</button>
+  </form>
+</section>
 </html>
