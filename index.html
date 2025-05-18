@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tyre&OIL - Магазин шин та мастил</title>
   <meta name="description" content="Купити шини та моторні оливи з безкоштовною доставкою Нова Пошта або SAT. Найкращі бренди за вигідними цінами.">
-  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.png" type="image/png">
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 10px;
+    }
+    header h1 {
+      font-size: 28px;
+    }
+    nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #333;
     }
     .tyre-grid {
       display: grid;
@@ -23,11 +30,22 @@
       padding: 15px;
       border-radius: 10px;
       background: #f9f9f9;
+      position: relative;
     }
     .tyre-img {
       width: 100%;
       height: auto;
       cursor: pointer;
+    }
+    .watermark {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
     #filters {
       display: flex;
@@ -65,30 +83,27 @@
   </header>
 
   <main>
-
-
-<section>
-  <h2>Вантажні шини</h2>
-  <div class="tyre-grid">
-    <div class="tyre-card">
-       <div class="tyre-image-wrapper">
-      <img src="images/IMG_20250518_141016_253.jpg" alt="Sunfull ST022" class="tyre-img" onclick="openLightbox(this.src)">
-         <div class="watermark">0673226299</div>
+    <section>
+      <h2>Вантажні шини</h2>
+      <div class="tyre-grid">
+        <div class="tyre-card">
+          <div class="tyre-image-wrapper">
+            <img src="images/IMG_20250518_141016_253.jpg" alt="Sunfull ST022" class="tyre-img" onclick="openLightbox(this.src)">
+            <div class="watermark">0673226299</div>
           </div>
-      <h3>Sunfull ST022</h3>
-      <p><strong>Розмір:</strong> 385/65R22.5</p>
-      <p><strong>PR:</strong> 20PR</p>
-      <p><strong>Індекс навантаження/швидкості:</strong> 160K</p>
-      <p><strong>Сезон:</strong> Всесезонні</p>
-      <p><strong>Ціна:</strong> 9700 грн</p> <!-- змінити при потребі -->
-      <p><strong>Кількість на складі:</strong> 10 шт</p> <!-- змінити при потребі -->
-      <p><strong>Країна:</strong> Китай</p>
-      <p><strong>Доставка:</strong> Нова Пошта або безкоштовно SAT</p>
-      <button class="add-to-cart">Додати в заявку</button>
-    </div>
-  </div>
-</section>
-
+          <h3>Sunfull ST022</h3>
+          <p><strong>Розмір:</strong> 385/65R22.5</p>
+          <p><strong>PR:</strong> 20PR</p>
+          <p><strong>Індекс навантаження/швидкості:</strong> 160K</p>
+          <p><strong>Сезон:</strong> Всесезонні</p>
+          <p><strong>Ціна:</strong> 9700 грн</p>
+          <p><strong>Кількість на складі:</strong> 10 шт</p>
+          <p><strong>Країна:</strong> Китай</p>
+          <p><strong>Доставка:</strong> Нова Пошта або безкоштовно SAT</p>
+          <button class="add-to-cart">Додати в заявку</button>
+        </div>
+      </div>
+    </section>
 
     <section>
       <h2>Легкові шини</h2>
@@ -99,13 +114,11 @@
           <option value="195/65 R15">195/65 R15</option>
           <option value="205/65 R16">205/65 R16</option>
         </select>
-
         <select id="brandFilter">
           <option value="">Всі бренди</option>
           <option value="Atlander">Atlander</option>
           <option value="Sunfull">Sunfull</option>
         </select>
-
         <select id="seasonFilter">
           <option value="">Будь-який сезон</option>
           <option value="Літні">Літні</option>
@@ -180,7 +193,10 @@
         const card = document.createElement('div');
         card.className = 'tyre-card';
         card.innerHTML = `
-          <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+          <div class="tyre-image-wrapper">
+            <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+            <div class="watermark">0673226299</div>
+          </div>
           <h3>${tyre.model}</h3>
           <p><strong>Розмір:</strong> ${tyre.size}</p>
           <p><strong>Індекс:</strong> ${tyre.index}</p>
@@ -200,11 +216,11 @@
       const brand = document.getElementById('brandFilter').value;
       const season = document.getElementById('seasonFilter').value;
 
-      const filtered = tyres.filter(tyre => {
-        return (!size || tyre.size === size) &&
-               (!brand || tyre.brand === brand) &&
-               (!season || tyre.season === season);
-      });
+      const filtered = tyres.filter(tyre =>
+        (!size || tyre.size === size) &&
+        (!brand || tyre.brand === brand) &&
+        (!season || tyre.season === season)
+      );
 
       renderTyres(filtered);
     }
@@ -222,30 +238,29 @@
       document.getElementById('lightbox').style.display = 'none';
     }
 
-    // показати всі шини при завантаженні
     renderTyres(tyres);
   </script>
+
+  <section id="contacts">
+    <h2>Контакти</h2>
+    <p><strong>Компанія:</strong> Tyre & Oil</p>
+    <p><strong>Телефон:</strong> <a href="tel:+380673226299">+38 (067) 322-62-99</a></p>
+    <p><strong>Email:</strong> <a href="mailto:mpkcompany74@gmail.com">mpkcompany74@gmail.com</a></p>
+    <p><strong>Графік роботи:</strong> Пн–Сб: 09:00–18:00, Нд: вихідний</p>
+
+    <h3>Зворотній зв'язок</h3>
+    <form action="mailto:mpkcompany74@gmail.com" method="POST" enctype="text/plain">
+      <label for="name">Ім'я:</label><br />
+      <input type="text" id="name" name="name" required><br /><br />
+
+      <label for="phone">Телефон:</label><br />
+      <input type="tel" id="phone" name="phone" required><br /><br />
+
+      <label for="message">Повідомлення:</label><br />
+      <textarea id="message" name="message" rows="4" required></textarea><br /><br />
+
+      <button type="submit">Надіслати</button>
+    </form>
+  </section>
 </body>
-
-<section id="contacts">
-  <h2>Контакти</h2>
-  <p><strong>Компанія:</strong> Tyre & Oil</p>
-  <p><strong>Телефон:</strong> <a href="tel:+380673226299">+38 (067) 322-62-99</a></p>
-  <p><strong>Email:</strong> <a href="mailto:mpkcompany74@gmail.com">mpkcompany74@gmail.com</a></p>
-  <p><strong>Графік роботи:</strong> Пн–Сб: 09:00–18:00, Нд: вихідний</p>
-
-  <h3>Зворотній зв'язок</h3>
-  <form action="mailto:mpkcompany74@gmail.com" method="POST" enctype="text/plain">
-    <label for="name">Ім'я:</label><br />
-    <input type="text" id="name" name="name" required><br /><br />
-
-    <label for="phone">Телефон:</label><br />
-    <input type="tel" id="phone" name="phone" required><br /><br />
-
-    <label for="message">Повідомлення:</label><br />
-    <textarea id="message" name="message" rows="4" required></textarea><br /><br />
-
-    <button type="submit">Надіслати</button>
-  </form>
-</section>
 </html>
