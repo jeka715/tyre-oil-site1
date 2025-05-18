@@ -173,6 +173,29 @@ const truckTyres = [
     brand: 'Sunfull'
   }
   // Додайте інші товари за потреби
+
+function renderTruckTyres(list) {
+  const container = document.getElementById('truckTyreContainer');
+  container.innerHTML = '';
+  list.forEach(tyre => {
+    const card = document.createElement('div');
+    card.className = 'tyre-card';
+    card.innerHTML = `
+      <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+      <h3>${tyre.model}</h3>
+      <p><strong>Розмір:</strong> ${tyre.size}</p>
+      <p><strong>PR:</strong> ${tyre.pr}</p>
+      <p><strong>Індекс навантаження/швидкості:</strong> ${tyre.index}</p>
+      <p><strong>Сезон:</strong> ${tyre.season}</p>
+      <p><strong>Ціна:</strong> ${tyre.price}</p>
+      <p><strong>Кількість на складі:</strong> ${tyre.quantity}</p>
+      <p><strong>Країна:</strong> ${tyre.country}</p>
+      <p><strong>Доставка:</strong> Нова Пошта або безкоштовно SAT</p>
+      <button class="add-to-cart">Додати в заявку</button>
+    `;
+    container.appendChild(card);
+  });
+}
 ];
     const tyres = [
       {
