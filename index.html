@@ -196,6 +196,19 @@ function renderTruckTyres(list) {
     container.appendChild(card);
   });
 }
+function applyTruckFilters() {
+  const size = document.getElementById('truckSizeFilter').value;
+  const brand = document.getElementById('truckBrandFilter').value;
+  const season = document.getElementById('truckSeasonFilter').value;
+
+  const filtered = truckTyres.filter(tyre => {
+    return (!size || tyre.size === size) &&
+           (!brand || tyre.brand === brand) &&
+           (!season || tyre.season === season);
+  });
+
+  renderTruckTyres(filtered);
+}
 ];
     const tyres = [
       {
