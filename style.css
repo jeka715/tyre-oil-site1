@@ -203,4 +203,19 @@ button:hover {
   pointer-events: none;
   z-index: 2;
 }
+.tyre-image-wrapper {
+  position: relative;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 6px;
+  font-size: 12px;
+  border-radius: 5px;
+  pointer-events: none;
+}
 
