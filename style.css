@@ -1,7 +1,12 @@
 body {
-  background: url('images/IMG_20250518_222557_082.jpg') no-repeat center center fixed;
+  background-image: url('images/IMG_20250518_222557_082.jpg');
   background-size: cover;
-  color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #000; /* Змінено на чорний для кращої читабельності */
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
 }
 header {
   background: #222;
@@ -217,11 +222,5 @@ button:hover {
   font-size: 12px;
   border-radius: 5px;
   pointer-events: none;
-}
-body {
-  background-image: url('images/назва_зображення.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
