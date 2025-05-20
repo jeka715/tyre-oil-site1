@@ -4,7 +4,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #000; /* Змінено на чорний для кращої читабельності */
+  color: #ff0000; /* Змінено на чорний для кращої читабельності */
   font-family: Arial, sans-serif;
   padding: 10px;
 }
