@@ -1,35 +1,357 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Головна</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Шини та мастила — Shinamaslo</title>
+  <h1>Продаж шин і моторного мастила в Україні</h1>
+<meta name="description" content="Продаж шин і моторного мастила по Україні. Безкоштовна доставка Новою Поштою та SAT.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyre&OIL - Магазин шин та мастил</title>
+  <meta name="description" content="Купити шини та моторні оливи з безкоштовною доставкою Нова Пошта або SAT. Найкращі бренди за вигідними цінами.">
+  <link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+  <style>
+<link rel="stylesheet" href="style.css">
+    body { font-family: Arial, sans-serif; padding: 10px; margin: 0; }
+    header h1 { font-size: 28px; }
+    nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+    .tyre-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .tyre-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f9f9f9;
+      position: relative;
+    }
+    .tyre-img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+    .watermark {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    #filters, #truck-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    select { padding: 5px; }
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Tyre & Oil</h1>
     <nav>
-      <ul>
-        <li><a href="index.html#home">Головна</a></li>
-        <li><a href="passenger-tyres.html#passenger-tyres">Легкові шини</a></li>
-        <li><a href="light-truck-tyres.html#light-truck-tyres">Легковантажні шини</a></li>
-        <li><a href="truck-tyres.html#truck-tyres">Вантажні шини</a></li>
-        <li><a href="oils.html#oils">Масла</a></li>
-        <li><a href="contact.html#contact">Контакти</a></li>
-      </ul>
-    </nav>
+  <ul>
+    <li><a href="#home">Головна</a></li>
+    <li><a href="#passenger-tyres">Легкові шини</a></li>
+    <li><a href="#light-truck-tyres">Легковантажні шини</a></li>
+    <li><a href="#truck-tyres">Вантажні шини</a></li>
+    <li><a href="#oils">Масла</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+</nav>
   </header>
 
   <main>
-    <section id="home">
-      <h2>Головна</h2>
-      <p>Контент буде додано пізніше.</p>
+    <section>
+      <h2>Вантажні шини</h2>
+      <div id="truck-filters">
+        <select id="truckSizeFilter">
+          <option value="">Всі розміри</option>
+          <option value="385/65R22.5">385/65R22.5</option>
+        </select>
+        <select id="truckBrandFilter">
+          <option value="">Всі бренди</option>
+          <option value="Sunfull">Sunfull</option>
+        </select>
+        <select id="truckSeasonFilter">
+          <option value="">Будь-який сезон</option>
+          <option value="Всесезонні">Всесезонні</option>
+        </select>
+      </div>
+      <div class="tyre-grid" id="truckTyreContainer"></div>
+    </section>
+
+    <section>
+      <h2>Легкові шини</h2>
+      <div id="filters">
+        <select id="sizeFilter">
+          <option value="">Всі розміри</option>
+           <option value="155/70 R13">155/70 R13</option>
+          <option value="175/70 R13">175/70 R13</option>
+          <option value="185/65 R15">185/65 R15</option>
+          <option value="195/65 R15">195/65 R15</option>
+          <option value="205/65 R16">205/65 R16</option>
+           
+        </select>
+        <select id="brandFilter">
+          <option value="">Всі бренди</option>
+          <option value="Atlander">Atlander</option>
+          <option value="Sunfull">Sunfull</option>
+        </select>
+        <select id="seasonFilter">
+          <option value="">Будь-який сезон</option>
+          <option value="Літні">Літні</option>
+          <option value="Зимові">Зимові</option>
+          <option value="Всесезонні">Всесезонні</option>
+        </select>
+      </div>
+      <div class="tyre-grid" id="tyreContainer"></div>
     </section>
   </main>
 
   <footer>
     <p>© 2025 Tyre & Oil</p>
   </footer>
+
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Збільшене зображення">
+  </div>
+
+  <section id="contacts">
+    <h2>Контакти</h2>
+    <p><strong>Компанія:</strong> Tyre & Oil</p>
+    <p><strong>Телефон:</strong> <a href="tel:+380673226299">+38 (067) 322-62-99</a></p>
+    <p><strong>Email:</strong> <a href="mailto:mpkcompany74@gmail.com">mpkcompany74@gmail.com</a></p>
+    <p><strong>Графік роботи:</strong> Пн–Сб: 09:00–18:00, Нд: вихідний</p>
+
+    <h3>Зворотній зв'язок</h3>
+    <form action="mailto:mpkcompany74@gmail.com" method="POST" enctype="text/plain">
+      <label for="name">Ім'я:</label><br />
+      <input type="text" id="name" name="name" required><br /><br />
+      <label for="phone">Телефон:</label><br />
+      <input type="tel" id="phone" name="phone" required><br /><br />
+      <label for="message">Повідомлення:</label><br />
+      <textarea id="message" name="message" rows="4" required></textarea><br /><br />
+      <button type="submit">Надіслати</button>
+    </form>
+  </section>
+
+  <script>
+    const truckTyres = [
+      {
+        img: 'images/IMG_20250518_141016_253.jpg',
+        model: 'Sunfull ST022',
+        size: '385/65R22.5',
+        pr: '20PR',
+        index: '160K',
+        season: 'Всесезонні',
+        price: '9600 грн',
+        quantity: '10 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
+      }
+    ];
+
+    const tyres = [
+      {
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '185/65 R15',
+        index: '88H',
+        season: 'Літні',
+        price: '1 800 грн',
+        quantity: '8 шт',
+        country: 'Китай',
+        brand: 'Atlander'
+      },
+       {
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '175/70 R13',
+        index: '82T',
+        season: 'Літні',
+        price: '1 420 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Atlander'
+      },
+      {
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '155/70 R13',
+        index: '75T ',
+        season: 'Літні',
+        price: '1 350 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Atlander'
+      },
+      {
+        img: 'images/Atlander_AX77.jpg',
+        model: 'Atlander AX-77',
+        size: '195/65 R15',
+        index: '91V',
+        season: 'Літні',
+        price: '1 920 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Atlander'
+      },
+{
+        img: 'images/Sunfull SF-688.jpg',
+        model: 'Sunfull SF-688',
+        size: '175/70 R13',
+        index: '82T',
+        season: 'Літні',
+        price: '1 400 грн',
+        quantity: '8 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
+      },
+      {
+        img: 'images/Sunfull SF-688.jpg',
+        model: 'Sunfull SF-688',
+        size: '195/65 R15',
+        index: '91V',
+        season: 'Літні',
+        price: '1 750 грн',
+        quantity: '20 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
+      },
+      {
+        img: 'images/Sunfull SF-688.jpg',
+        model: 'Sunfull SF-688',
+        size: '205/65 R16',
+        index: '95H',
+        season: 'Літні',
+        price: '2 250 грн',
+        quantity: '12 шт',
+        country: 'Китай',
+        brand: 'Sunfull'
+      }
+    ];
+
+    function renderTruckTyres(list) {
+      const container = document.getElementById('truckTyreContainer');
+      container.innerHTML = '';
+      list.forEach(tyre => {
+        const card = document.createElement('div');
+        card.className = 'tyre-card';
+        card.innerHTML = `
+          <div class="tyre-image-wrapper">
+            <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+            <div class="watermark">0673226299</div>
+          </div>
+          <h3>${tyre.model}</h3>
+          <p><strong>Розмір:</strong> ${tyre.size}</p>
+          <p><strong>PR:</strong> ${tyre.pr}</p>
+          <p><strong>Індекс навантаження/швидкості:</strong> ${tyre.index}</p>
+          <p><strong>Сезон:</strong> ${tyre.season}</p>
+          <p><strong>Ціна:</strong> ${tyre.price}</p>
+          <p><strong>Кількість:</strong> ${tyre.quantity}</p>
+          <p><strong>Країна:</strong> ${tyre.country}</p>
+          <p><strong>Доставка:</strong> Нова Пошта або SAT</p>
+          <button class="add-to-cart">Додати в заявку</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderTyres(list) {
+      const container = document.getElementById('tyreContainer');
+      container.innerHTML = '';
+      list.forEach(tyre => {
+        const card = document.createElement('div');
+        card.className = 'tyre-card';
+        card.innerHTML = `
+          <div class="tyre-image-wrapper">
+            <img src="${tyre.img}" alt="${tyre.model}" class="tyre-img" onclick="openLightbox('${tyre.img}')">
+            <div class="watermark">0673226299</div>
+          </div>
+          <h3>${tyre.model}</h3>
+          <p><strong>Розмір:</strong> ${tyre.size}</p>
+          <p><strong>Індекс:</strong> ${tyre.index}</p>
+          <p><strong>Сезон:</strong> ${tyre.season}</p>
+          <p><strong>Ціна:</strong> ${tyre.price}</p>
+          <p><strong>Кількість:</strong> ${tyre.quantity}</p>
+          <p><strong>Країна:</strong> ${tyre.country}</p>
+          <p><strong>Доставка:</strong> Безкоштовна (Нова Пошта або SAT)</p>
+          <button class="add-to-cart">Додати в заявку</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function applyTruckFilters() {
+      const size = document.getElementById('truckSizeFilter').value;
+      const brand = document.getElementById('truckBrandFilter').value;
+      const season = document.getElementById('truckSeasonFilter').value;
+
+      const filtered = truckTyres.filter(t =>
+        (!size || t.size === size) &&
+        (!brand || t.brand === brand) &&
+        (!season || t.season === season)
+      );
+      renderTruckTyres(filtered);
+    }
+
+    function applyFilters() {
+      const size = document.getElementById('sizeFilter').value;
+      const brand = document.getElementById('brandFilter').value;
+      const season = document.getElementById('seasonFilter').value;
+
+      const filtered = tyres.filter(t =>
+        (!size || t.size === size) &&
+        (!brand || t.brand === brand) &&
+        (!season || t.season === season)
+      );
+      renderTyres(filtered);
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Початковий рендер
+    renderTruckTyres(truckTyres);
+    renderTyres(tyres);
+
+    // Події фільтрів
+    document.getElementById('truckSizeFilter').addEventListener('change', applyTruckFilters);
+    document.getElementById('truckBrandFilter').addEventListener('change', applyTruckFilters);
+    document.getElementById('truckSeasonFilter').addEventListener('change', applyTruckFilters);
+    document.getElementById('sizeFilter').addEventListener('change', applyFilters);
+    document.getElementById('brandFilter').addEventListener('change', applyFilters);
+    document.getElementById('seasonFilter').addEventListener('change', applyFilters);
+  </script>
 </body>
 </html>
